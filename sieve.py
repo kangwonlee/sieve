@@ -40,9 +40,11 @@ class Sieve:
         self.sieve = ['',] + list(range(2, self.m * self.n + 1))
 
         # pivot
-        self.p = 2
+        self.p = 0
 
-        self.update_table()
+        self.root.bind("<space>", self.handle_spacebar)
+
+        self.add_table_rows()
 
         self.root.mainloop()
 
@@ -51,9 +53,36 @@ class Sieve:
             j = i + self.n
             yield self.sieve[i:j]
 
-    def update_table(self):
+    def add_table_rows(self):
         for i, row in enumerate(self.iter_rows()):
             self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+
+    def update_table(self):
+        # https://stackoverflow.com/questions/53468581
+        for row in self.table.get_children():
+            self.table.delete(row)
+
+        for i, row in enumerate(self.iter_rows()):
+            self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+
+    def handle_spacebar(self, event):
+        # https://stackoverflow.com/questions/59845767
+
+        # find next int element in self.sieve
+        while not isinstance(self.sieve[self.p], int):
+            self.p += 1
+
+        # remove multiples of self.sieve[self.p]
+        for k in range(self.p+1, self.m * self.n):
+            print(f"self.sieve[{k}] = ", end='')
+            print(repr(self.sieve[k]))
+            if isinstance(self.sieve[k], int):
+                if not self.sieve[k] % self.sieve[self.p]:
+                    self.sieve[k] = ''
+                    print(f"self.sieve[{k}] = {self.sieve[k]!r}")
+
+        self.update_table()
+        self.root.update()
 
 
 if "__main__" == __name__:
