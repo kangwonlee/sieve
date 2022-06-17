@@ -37,16 +37,17 @@ class Sieve:
                 width=self.column_width
             )
 
-        self.rows = [
-            tuple(range( 1, 10+1)),
-            tuple(range(11, 20+1)),
-            tuple(range(21, 30+1)),
-        ]
+        self.sieve = list(range(1, self.m * self.n + 1))
 
-        for i, row in enumerate(self.rows):
+        for i, row in enumerate(self.iter_rows()):
             self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
 
         self.root.mainloop()
+
+    def iter_rows(self):
+        for i in range(0, len(self.sieve), self.n):
+            j = i + self.n
+            yield self.sieve[i:j]
 
 
 if "__main__" == __name__:
