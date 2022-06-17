@@ -28,7 +28,6 @@ def main():
 
     for col in range(10):
         treeview.column(f"#{col}", width=width)
-        treeview.heading(f"#{col}", text="")
 
     treelist = [
         tuple(range( 1, 10+1)),
