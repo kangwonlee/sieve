@@ -48,6 +48,10 @@ class Sieve:
 
         self.root.mainloop()
 
+    def init_sieve(self):
+        self.sieve = ['',] + list(range(2, self.m * self.n + 1))
+        self.p = 0
+
     def iter_rows(self):
         for i in range(0, len(self.sieve), self.n):
             j = i + self.n
@@ -66,8 +70,7 @@ class Sieve:
             self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
 
     def handle_spacebar(self, event):
-        # https://stackoverflow.com/questions/59845767
-
+        if self.p < len(self.sieve):
         # find next int element in self.sieve
         while not isinstance(self.sieve[self.p], int):
             self.p += 1
@@ -85,10 +88,13 @@ class Sieve:
                     self.sieve[k] = ''
                     print(f"self.sieve[{k}] = {self.sieve[k]!r}")
 
-        self.update_table()
-        self.root.update()
+            self.p += 1
+        else:
+            self.init_sieve()
 
-        self.p += 1
+        self.update_table()
+        # https://stackoverflow.com/questions/59845767
+        self.root.update()
 
 
 if "__main__" == __name__:
