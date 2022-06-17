@@ -9,7 +9,7 @@ def main():
 
 
 class Sieve:
-    def __init__(self, m:int=3, n:int=10) -> None:
+    def __init__(self, m:int=10, n:int=10) -> None:
 
         self.m = m
         self.n = n
@@ -18,7 +18,7 @@ class Sieve:
 
         self.root = tk.Tk()
         self.root.title("Sieve of Erastosthenes")
-        self.root.geometry(f"{self.column_width*(self.n+1)}x{100*self.m}+100+100")
+        self.root.geometry(f"{self.column_width*(self.n+1)}x{25*self.m}+100+100")
         self.root.resizable(False, False)
 
         self.columns = [f"col{i:02d}" for i in range(10)]
@@ -71,22 +71,22 @@ class Sieve:
 
     def handle_spacebar(self, event):
         if self.p < len(self.sieve):
-        # find next int element in self.sieve
-        while not isinstance(self.sieve[self.p], int):
-            self.p += 1
+            # find next int element in self.sieve
+            while not isinstance(self.sieve[self.p], int):
+                self.p += 1
 
-        pivot = self.sieve[self.p]
+            pivot = self.sieve[self.p]
 
-        assert isinstance(pivot, int)
+            assert isinstance(pivot, int)
 
-        # remove multiples of self.sieve[self.p]
-        for k in range(self.p+1, self.m * self.n):
-            print(f"p = {pivot} self.sieve[{k}] = ", end='')
-            print(repr(self.sieve[k]))
-            if isinstance(self.sieve[k], int):
-                if not self.sieve[k] % pivot:
-                    self.sieve[k] = ''
-                    print(f"self.sieve[{k}] = {self.sieve[k]!r}")
+            # remove multiples of self.sieve[self.p]
+            for k in range(self.p+1, self.m * self.n):
+                print(f"p = {pivot} self.sieve[{k}] = ", end='')
+                print(repr(self.sieve[k]))
+                if isinstance(self.sieve[k], int):
+                    if not self.sieve[k] % pivot:
+                        self.sieve[k] = ''
+                        print(f"self.sieve[{k}] = {self.sieve[k]!r}")
 
             self.p += 1
         else:
