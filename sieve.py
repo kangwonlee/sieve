@@ -9,7 +9,7 @@ def main():
     m = 3
     n = 10
 
-    width = 100
+    width = 50
 
     root = tk.Tk()
     root.title("Sieve of Erastosthenes")
