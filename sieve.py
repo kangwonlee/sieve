@@ -15,13 +15,14 @@ class Sieve:
         self.n = n
 
         self.column_width = 50
+        self.row_height = 25
 
         self.root = tk.Tk()
         self.root.title("Sieve of Erastosthenes")
-        self.root.geometry(f"{self.column_width*(self.n+1)}x{25*self.m}+100+100")
+        self.root.geometry(f"{self.column_width*(self.n+1)}x{self.row_height*self.m}+100+100")
         self.root.resizable(False, False)
 
-        self.columns = [f"col{i:02d}" for i in range(10)]
+        self.columns = [f"col{i:02d}" for i in range(self.n)]
 
         self.table = ttk.Treeview(
             self.root,
@@ -31,7 +32,7 @@ class Sieve:
         )
         self.table.pack()
 
-        for col in range(10):
+        for col in range(self.n):
             self.table.column(
                 f"#{col}",
                 width=self.column_width
