@@ -18,7 +18,7 @@ class Sieve:
         self.row_height = 25
 
         self.root = tk.Tk()
-        self.root.title("Sieve of Erastosthenes")
+        self.root.title("Sieve of Eratosthenes")
         self.root.geometry(f"{self.column_width*(self.n+1)}x{self.row_height*self.m}+100+100")
         self.root.resizable(False, False)
 
