@@ -37,7 +37,10 @@ class Sieve:
                 width=self.column_width
             )
 
-        self.sieve = list(range(1, self.m * self.n + 1))
+        self.sieve = ['',] + list(range(2, self.m * self.n + 1))
+
+        # pivot
+        self.p = 2
 
         for i, row in enumerate(self.iter_rows()):
             self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
