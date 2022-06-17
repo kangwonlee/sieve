@@ -68,8 +68,7 @@ class Sieve:
         for row in self.table.get_children():
             self.table.delete(row)
 
-        for i, row in enumerate(self.iter_rows()):
-            self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+        self.add_table_rows()
 
     def find_next_p(self) -> int:
         b_found = False
