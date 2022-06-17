@@ -9,7 +9,7 @@ def main():
 
 
 class Sieve:
-    def __init__(self, m:int=10, n:int=10) -> None:
+    def __init__(self, m:int=20, n:int=10) -> None:
 
         self.m = m
         self.n = n
@@ -26,6 +26,7 @@ class Sieve:
 
         self.table = ttk.Treeview(
             self.root,
+            height=self.m,
             columns=self.columns,
             displaycolumns=self.columns,
             show="tree",    # https://stackoverflow.com/a/51763444
