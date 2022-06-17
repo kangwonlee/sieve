@@ -93,12 +93,9 @@ class Sieve:
 
             # remove multiples of self.sieve[self.p]
             for k in range(self.p+1, self.m * self.n):
-                print(f"p = {pivot} self.sieve[{k}] = ", end='')
-                print(repr(self.sieve[k]))
                 if isinstance(self.sieve[k], int):
                     if not self.sieve[k] % pivot:
                         self.sieve[k] = ''
-                        print(f"self.sieve[{k}] = {self.sieve[k]!r}")
 
         else:
             self.init_sieve()
