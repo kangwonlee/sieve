@@ -1,5 +1,6 @@
 # ref : https://m.blog.naver.com/dsz08082/22174314569
 
+import time
 import tkinter as tk
 import tkinter.ttk as ttk
 
@@ -9,10 +10,11 @@ def main():
 
 
 class Sieve:
-    def __init__(self, m:int=20, n:int=10) -> None:
 
+    def __init__(self, m:int=20, n:int=10, sleep_sec:float=0.5) -> None:
         self.m = m
         self.n = n
+        self.sleep_sec = sleep_sec
 
         self.column_width = 50
         self.row_height = 25
@@ -90,6 +92,8 @@ class Sieve:
 
             self.sieve[self.p] = f"[{pivot}]"
 
+            self.update()
+
             assert isinstance(pivot, int)
 
             # remove multiples of self.sieve[self.p]
@@ -97,13 +101,18 @@ class Sieve:
                 if isinstance(self.sieve[k], int):
                     if not self.sieve[k] % pivot:
                         self.sieve[k] = ''
+                        time.sleep(self.sleep_sec)
+                        self.update()
 
         else:
             self.init_sieve()
+            self.update()
 
+    def update(self):
         self.update_table()
         # https://stackoverflow.com/questions/59845767
         self.root.update()
+
 
 
 if "__main__" == __name__:
