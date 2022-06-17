@@ -69,11 +69,21 @@ class Sieve:
         for i, row in enumerate(self.iter_rows()):
             self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
 
+    def find_next_p(self) -> int:
+        b_found = False
+        for p in range(self.p+1, len(self.sieve)):
+            if isinstance(self.sieve[p], int):
+                result = p
+                b_found = True
+                break
+        if not b_found:
+            result = len(self.sieve) + 1
+
+        return result
+
     def handle_spacebar(self, event):
+        self.p = self.find_next_p()
         if self.p < len(self.sieve):
-            # find next int element in self.sieve
-            while not isinstance(self.sieve[self.p], int):
-                self.p += 1
 
             pivot = self.sieve[self.p]
 
@@ -88,7 +98,6 @@ class Sieve:
                         self.sieve[k] = ''
                         print(f"self.sieve[{k}] = {self.sieve[k]!r}")
 
-            self.p += 1
         else:
             self.init_sieve()
 
