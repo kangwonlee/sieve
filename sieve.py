@@ -42,8 +42,7 @@ class Sieve:
         # pivot
         self.p = 2
 
-        for i, row in enumerate(self.iter_rows()):
-            self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+        self.update_table()
 
         self.root.mainloop()
 
@@ -51,6 +50,10 @@ class Sieve:
         for i in range(0, len(self.sieve), self.n):
             j = i + self.n
             yield self.sieve[i:j]
+
+    def update_table(self):
+        for i, row in enumerate(self.iter_rows()):
+            self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
 
 
 if "__main__" == __name__:
