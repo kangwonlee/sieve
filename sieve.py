@@ -13,7 +13,7 @@ def main():
 
     root = tk.Tk()
     root.title("Erasthotenes Sieve")
-    root.geometry(f"{width*n}x{100*m}+100+100")
+    root.geometry(f"{width*(n+1)}x{100*m}+100+100")
     root.resizable(False, False)
 
     columns = [f"col{i:02d}" for i in range(10)]
