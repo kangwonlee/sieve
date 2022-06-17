@@ -72,17 +72,23 @@ class Sieve:
         while not isinstance(self.sieve[self.p], int):
             self.p += 1
 
+        pivot = self.sieve[self.p]
+
+        assert isinstance(pivot, int)
+
         # remove multiples of self.sieve[self.p]
         for k in range(self.p+1, self.m * self.n):
-            print(f"self.sieve[{k}] = ", end='')
+            print(f"p = {pivot} self.sieve[{k}] = ", end='')
             print(repr(self.sieve[k]))
             if isinstance(self.sieve[k], int):
-                if not self.sieve[k] % self.sieve[self.p]:
+                if not self.sieve[k] % pivot:
                     self.sieve[k] = ''
                     print(f"self.sieve[{k}] = {self.sieve[k]!r}")
 
         self.update_table()
         self.root.update()
+
+        self.p += 1
 
 
 if "__main__" == __name__:
