@@ -5,40 +5,48 @@ import tkinter.ttk as ttk
 
 
 def main():
+    s = Sieve()
 
-    m = 3
-    n = 10
 
-    width = 50
+class Sieve:
+    def __init__(self, m:int=3, n:int=10) -> None:
 
-    root = tk.Tk()
-    root.title("Sieve of Erastosthenes")
-    root.geometry(f"{width*(n+1)}x{100*m}+100+100")
-    root.resizable(False, False)
+        self.m = m
+        self.n = n
 
-    columns = [f"col{i:02d}" for i in range(10)]
+        self.column_width = 50
 
-    treeview = ttk.Treeview(
-        root,
-        columns=columns,
-        displaycolumns=columns,
-        show="tree",    # https://stackoverflow.com/a/51763444
-    )
-    treeview.pack()
+        self.root = tk.Tk()
+        self.root.title("Sieve of Erastosthenes")
+        self.root.geometry(f"{self.column_width*(self.n+1)}x{100*self.m}+100+100")
+        self.root.resizable(False, False)
 
-    for col in range(10):
-        treeview.column(f"#{col}", width=width)
+        self.columns = [f"col{i:02d}" for i in range(10)]
 
-    treelist = [
-        tuple(range( 1, 10+1)),
-        tuple(range(11, 20+1)),
-        tuple(range(21, 30+1)),
-    ]
+        self.table = ttk.Treeview(
+            self.root,
+            columns=self.columns,
+            displaycolumns=self.columns,
+            show="tree",    # https://stackoverflow.com/a/51763444
+        )
+        self.table.pack()
 
-    for i, row in enumerate(treelist):
-        treeview.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+        for col in range(10):
+            self.table.column(
+                f"#{col}",
+                width=self.column_width
+            )
 
-    root.mainloop()
+        self.rows = [
+            tuple(range( 1, 10+1)),
+            tuple(range(11, 20+1)),
+            tuple(range(21, 30+1)),
+        ]
+
+        for i, row in enumerate(self.rows):
+            self.table.insert('', 'end', text='', values=row, iid=f"row{i:02d}")
+
+        self.root.mainloop()
 
 
 if "__main__" == __name__:
