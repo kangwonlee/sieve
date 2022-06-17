@@ -22,6 +22,7 @@ def main():
         root,
         columns=columns,
         displaycolumns=columns,
+        show="tree",    # https://stackoverflow.com/a/51763444
     )
     treeview.pack()
 
