@@ -87,6 +87,8 @@ class Sieve:
 
             pivot = self.sieve[self.p]
 
+            self.sieve[self.p] = f"[{pivot}]"
+
             assert isinstance(pivot, int)
 
             # remove multiples of self.sieve[self.p]
