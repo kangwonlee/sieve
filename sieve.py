@@ -12,7 +12,7 @@ def main():
     width = 100
 
     root = tk.Tk()
-    root.title("Erasthotenes Sieve")
+    root.title("Sieve of Erastosthenes")
     root.geometry(f"{width*(n+1)}x{100*m}+100+100")
     root.resizable(False, False)
 
